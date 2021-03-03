@@ -50,13 +50,13 @@ public class TrainSystemTest {
 		Assert.assertEquals(0, controller.getReferenceSpeed());
 	}
 
-wr	//saját tesztem:
+//saját tesztem:
 
 	@Test
 	public void Get_AlarmFlag_is_True() {
 		boolean alarmflag;
 		alarmflag = user.getAlarmFlag();
-		Assert.assertEquals(true,alarmflag);
+		Assert.assertEquals(false,alarmflag);
 	}
 
 	
