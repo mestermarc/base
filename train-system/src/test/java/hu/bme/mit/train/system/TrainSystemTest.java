@@ -56,7 +56,7 @@ wr	//saját tesztem:
 	public void Get_AlarmFlag_is_True() {
 		boolean alarmflag;
 		alarmflag = user.getAlarmFlag();
-		Assert.assertFalse(alarmflag);
+		Assert.assertEquals(true,alarmflag);
 	}
 
 	
