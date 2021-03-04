@@ -1,5 +1,7 @@
 package hu.bme.mit.train.system;
 
+import com.google.common.collect.Table;
+import com.google.common.collect.TreeBasedTable;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +10,7 @@ import hu.bme.mit.train.interfaces.TrainController;
 import hu.bme.mit.train.interfaces.TrainSensor;
 import hu.bme.mit.train.interfaces.TrainUser;
 import hu.bme.mit.train.system.TrainSystem;
+
 
 public class TrainSystemTest {
 
@@ -23,6 +26,10 @@ public class TrainSystemTest {
 		user = system.getUser();
 
 		sensor.overrideSpeedLimit(50);
+
+
+
+
 	}
 	
 	@Test
@@ -59,5 +66,22 @@ public class TrainSystemTest {
 		Assert.assertEquals(false,alarmflag);
 	}
 
-	
+	//Tachograph teszt
+
+	@Test
+	public void Tachograph_is_Working() {
+		//tachograph table létrehozása
+		Table<String, Integer, Integer> Tachograph
+				= TreeBasedTable.create();
+
+		Tachograph.put("12:10",user.getJoystickPosition(),controller.getReferenceSpeed());
+
+		user.overrideJoystickPosition(-5);
+		controller.followSpeed();
+		Tachograph.put("12:23",user.getJoystickPosition(),controller.getReferenceSpeed());
+
+		int refspeed
+				= Tachograph.get("12:23", user.getJoystickPosition());
+		Assert.assertEquals(refspeed,controller.getReferenceSpeed());
+	}
 }
