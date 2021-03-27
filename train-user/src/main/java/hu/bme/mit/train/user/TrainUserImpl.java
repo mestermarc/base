@@ -23,7 +23,7 @@ public class TrainUserImpl implements TrainUser {
 	}
 
 	@Override
-	public void overrideJoystickPosition(int joystickPosition) {
+	public void overrideJoystickPosition(int joystickPosition) throws InterruptedException {
 		this.joystickPosition = joystickPosition;
 		controller.setJoystickPosition(joystickPosition);
 	}
