@@ -5,6 +5,7 @@ import com.google.common.collect.TreeBasedTable;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
 import hu.bme.mit.train.interfaces.TrainController;
 import hu.bme.mit.train.interfaces.TrainSensor;
@@ -24,11 +25,8 @@ public class TrainSystemTest {
 		controller = system.getController();
 		sensor = system.getSensor();
 		user = system.getUser();
-
+		user.setAlarmState(false);
 		sensor.overrideSpeedLimit(50);
-
-
-
 
 	}
 	
@@ -84,4 +82,8 @@ public class TrainSystemTest {
 				= Tachograph.get("12:23", user.getJoystickPosition());
 		Assert.assertEquals(refspeed,controller.getReferenceSpeed());
 	}
+
+
+
+
 }
