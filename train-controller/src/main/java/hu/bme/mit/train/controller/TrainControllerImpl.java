@@ -10,12 +10,6 @@ public class TrainControllerImpl implements TrainController {
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
 
-	public TrainControllerImpl() throws InterruptedException {
-		//periodic calling
-		followSpeed();;
-		Thread.sleep(1000);
-	}
-
 	@Override
 	public void followSpeed() {
 		if (referenceSpeed < 0) {
@@ -50,9 +44,10 @@ public class TrainControllerImpl implements TrainController {
 	}
 
 	@Override
-	public void setJoystickPosition(int joystickPosition) {
-		this.followSpeed();	//If the user changes the position of the joystick, the reference speed does change
+	public void setJoystickPosition(int joystickPosition) throws InterruptedException {
 		this.step = joystickPosition;
+		Thread.sleep(1000);
+		this.followSpeed();	//If the user changes the position of the joystick, the reference speed does change
 	}
 
 }
