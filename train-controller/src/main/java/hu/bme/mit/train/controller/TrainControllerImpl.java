@@ -2,11 +2,19 @@ package hu.bme.mit.train.controller;
 
 import hu.bme.mit.train.interfaces.TrainController;
 
+import java.sql.Time;
+
 public class TrainControllerImpl implements TrainController {
 
 	private int step = 0;
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
+
+	public TrainControllerImpl() throws InterruptedException {
+		//periodic calling
+		followSpeed();;
+		Thread.sleep(1000);
+	}
 
 	@Override
 	public void followSpeed() {
@@ -43,7 +51,8 @@ public class TrainControllerImpl implements TrainController {
 
 	@Override
 	public void setJoystickPosition(int joystickPosition) {
-		this.step = joystickPosition;		
+		this.followSpeed();	//If the user changes the position of the joystick, the reference speed does change
+		this.step = joystickPosition;
 	}
 
 }
