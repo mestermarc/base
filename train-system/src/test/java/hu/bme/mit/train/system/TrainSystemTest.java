@@ -33,7 +33,7 @@ public class TrainSystemTest {
 	}
 	
 	@Test
-	public void OverridingJoystickPosition_IncreasesReferenceSpeed() {
+	public void OverridingJoystickPosition_IncreasesReferenceSpeed() throws InterruptedException {
 		sensor.overrideSpeedLimit(10);
 
 		Assert.assertEquals(0, controller.getReferenceSpeed());
@@ -49,7 +49,7 @@ public class TrainSystemTest {
 	}
 
 	@Test
-	public void OverridingJoystickPositionToNegative_SetsReferenceSpeedToZero() {
+	public void OverridingJoystickPositionToNegative_SetsReferenceSpeedToZero() throws InterruptedException {
 		user.overrideJoystickPosition(4);
 		controller.followSpeed();
 		user.overrideJoystickPosition(-5);
@@ -63,13 +63,13 @@ public class TrainSystemTest {
 	public void Get_AlarmFlag_is_True() {
 		boolean alarmflag;
 		alarmflag = user.getAlarmFlag();
-		Assert.assertEquals(false,alarmflag);
+		Assert.assertEquals(false, alarmflag);
 	}
 
 	//Tachograph teszt
 
 	@Test
-	public void Tachograph_is_Working() {
+	public void Tachograph_is_Working() throws InterruptedException {
 		//tachograph table létrehozása
 		Table<String, Integer, Integer> Tachograph
 				= TreeBasedTable.create();
